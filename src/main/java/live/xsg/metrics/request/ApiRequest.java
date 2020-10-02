@@ -12,6 +12,12 @@ public class ApiRequest {
     //接口请求的结束时间
     private long endTime;
 
+    public ApiRequest(String api, long startTime, long endTime) {
+        this.api = api;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
     public String getApi() {
         return api;
     }
