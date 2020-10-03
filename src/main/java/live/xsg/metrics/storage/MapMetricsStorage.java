@@ -33,8 +33,7 @@ public class MapMetricsStorage implements MetricsStorage {
         if (requestStats == null) return;
 
         for (RequestStat requestStat : requestStats) {
-            String print = String.format("api: %s, count: %d", requestStat.getApi(), requestStat.getCount());
-            System.out.println(print);
+            System.out.println(requestStat);
         }
     }
 }

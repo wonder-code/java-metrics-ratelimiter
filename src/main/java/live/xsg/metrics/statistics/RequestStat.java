@@ -9,6 +9,8 @@ public class RequestStat {
     private String api;
     //请求次数
     private int count;
+    //平均响应时间
+    private long avg;
 
     public RequestStat(String api) {
         this.api = api;
@@ -24,5 +26,22 @@ public class RequestStat {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public long getAvg() {
+        return avg;
+    }
+
+    public void setAvg(long avg) {
+        this.avg = avg;
+    }
+
+    @Override
+    public String toString() {
+        return "RequestStat{" +
+                "api='" + api + '\'' +
+                ", count=" + count +
+                ", avgResp=" + avg +
+                '}';
     }
 }

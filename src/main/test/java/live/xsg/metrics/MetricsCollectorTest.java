@@ -2,6 +2,7 @@ package live.xsg.metrics;
 
 import live.xsg.metrics.exception.MetricsException;
 import live.xsg.metrics.request.ApiRequest;
+import live.xsg.metrics.statistics.aggregator.AvgAggregator;
 import live.xsg.metrics.statistics.aggregator.CountAggregator;
 import live.xsg.metrics.statistics.task.StatisticsTask;
 import live.xsg.metrics.statistics.task.StatisticsTaskBuilder;
@@ -19,19 +20,26 @@ public class MetricsCollectorTest {
 
     private String[] mockApi = {"/user/login", "/user/register", "/user/logout", "/user/detail"};
 
-    public void metrics_test() throws MetricsException {
-        MapMetricsStorage storage = new MapMetricsStorage();
-        MetricsCollector metricsCollector = new MetricsCollector(storage);
+    private void execStatisticsTask(MapMetricsStorage storage) throws MetricsException {
         StatisticsTask statisticsTask = StatisticsTaskBuilder.builder()
                 .aggregator(new CountAggregator())
+                .aggregator(new AvgAggregator())
                 .storage(storage)
                 .build();
 
         statisticsTask.execute();
+    }
+
+    public void metrics_test() throws MetricsException {
+        MapMetricsStorage storage = new MapMetricsStorage();
+        this.execStatisticsTask(storage);
+
+        MetricsCollector metricsCollector = new MetricsCollector(storage);
+
 
         for (int i = 0; i < 1000; i++) {
             String api = mockApi[ThreadLocalRandom.current().nextInt(mockApi.length)];
-            long startRequest = System.currentTimeMillis() + 30000;
+            long startRequest = System.currentTimeMillis() + 11000;
             long endRequest = startRequest + ThreadLocalRandom.current().nextLong(5000);
             ApiRequest request = new ApiRequest(api, startRequest, endRequest);
 

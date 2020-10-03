@@ -13,7 +13,7 @@ import java.util.List;
 public class StatisticsTaskBuilder {
 
     //执行统计的频率，默认 30 s
-    private static final long DEFAULT_DELAY = 30000L;
+    private static final long DEFAULT_DELAY = 10000L;
     //默认的时间窗口大小，1 分钟
     private static final long DEFAULT_WINDOW = 60 * 1000L;
 
